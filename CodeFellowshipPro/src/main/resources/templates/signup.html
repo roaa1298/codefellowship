@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign up</title>
+    <link th:href="@{/form.css}" rel="stylesheet"/>
+    <link th:href="@{/nav.css}" rel="stylesheet"/>
+</head>
+<body>
+<header>
+<nav th:replace="nav :: nav"></nav>
+</header>
+<div class="here"><h1>Sign up here!</h1></div>
+<main class="main-content">
+<p th:if="${param.taken}">Sorry, this username was used, please try another username</p>
+<div class="register">
+<form action="/signup" method="POST">
+    <label for="username">Username: </label>
+    <input type="text" name="username" id="username"><br>
+
+    <label for="firstName">First name: </label>
+    <input type="text" name="firstName" id="firstName"><br>
+
+    <label for="lastName">Last name: </label>
+    <input type="text" name="lastName" id="lastName"><br>
+
+    <label for="password">Password: </label>
+    <input type="password" name="password" id="password"><br>
+
+    <label for="dateOfBirth">Birth date: </label>
+    <input type="date" name="dateOfBirth" id="dateOfBirth"><br>
+
+    <label for="bio">Bio: </label>
+    <textarea name="bio" id="bio"></textarea><br>
+
+    <input type="submit" value="Sign Up">
+</form>
+</div>
+</main>
+</body>
+</html>
