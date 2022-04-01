@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>CodeFellowship</title>
+    <link th:href="@{/form.css}" rel="stylesheet"/>
+    <link th:href="@{/nav.css}" rel="stylesheet"/>
+</head>
+<body>
+<header>
+    <nav th:replace="nav :: nav"></nav>
+</header>
+<div><h1>CodeFellowship</h1></div><br>
+<main class="splashpageBox">
+    <section class="splashpageInfo">
+        <p class="splashpageTitle">Code Fellowship</p>
+        <p class="splashpageSubTitle">Join Others on Their Adventures</p>
+        <div class="splashpageQuestion">
+            <p class="question">What is Code Fellowship?</p>
+            <p>Students, young developers, and anybody else wanting to engage with other lifelong learners can join Code
+                Fellowship.</p>
+        </div>
+        <div class="splashpageQuestion">
+            <p class="question">What purpose does it serve to be here?</p>
+            <p>We all have the same desire to learn how to write clean, secure, and performant code in the dev-loop.</p>
+        </div>
+        <div class="splashpageQuestion">
+            <p class="question">What do I get in this environment?</p>
+            <p>You will gain knowledge that will allow you to cut your learning time in half compared to if you studied
+                alone.</p>
+        </div>
+        <div class="splashpageQuestion">
+            <p class="question">What will you get in terms of value?</p>
+            <p>The true value of Code Fellowship is the long-term connections you'll make.</p>
+        </div>
+        <p  class="splashpageSlog">We're here to make it easier for developers to communicate with one another. Don't forget to register now to
+            begin your experience!</p>
+    </section>
+</main>
+</body>
+</html>

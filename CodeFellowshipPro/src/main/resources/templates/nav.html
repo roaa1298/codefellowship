@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Code Fellowship</title>
+    <link th:href="@{/nav.css}" rel="stylesheet"/>
+</head>
+<body>
+<nav th:fragment="nav" class="navbar">
+
+    <h3><a th:href="@{/}" class="main-page">Code Fellowship</a></h3>
+
+    <ul class="main" id="menu" th:if=${user}>
+        <li><a th:href="@{/}" class="menuLink">Home</a></li>
+        <li><a th:href="@{/logout}" class="menuLink">Log Out</a></li>
+    </ul>
+
+    <ul class="main" id="menu" th:unless=${user}>
+        <li><a th:href="@{/login}" class="menuLink">Log In</a></li>
+        <li><a th:href="@{/signup}" class="menuLink">Sign Up</a></li>
+    </ul>
+</nav>
+</body>
+</html>
