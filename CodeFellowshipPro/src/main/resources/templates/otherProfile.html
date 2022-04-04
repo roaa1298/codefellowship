@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>profile</title>
+    <link th:href="@{/form.css}" rel="stylesheet"/>
+    <link th:href="@{/nav.css}" rel="stylesheet"/>
+</head>
+<body>
+<header>
+    <nav th:replace="nav :: nav"></nav>
+</header>
+<main>
+    <div class="card" style="width: 18rem;">
+        <img src="user.jpg" class="card-img-top" alt="ProfilePicture">
+        <div class="card-body">
+            <h5 class="card-text" th:text="${username.firstName} + ${username.lastName}"></h5>
+            <p class="card-text" th:text="${username.bio}"></p>
+            <p class="card-text" th:text="${username.dateOfBirth}"></p>
+        </div>
+
+    </div>
+    <br>
+    <br>
+
+    <form th:each="post : ${username.posts}">
+        <legend>Posts</legend>
+        <fieldset>
+            <div class="mb-3">
+                <p th:text="${post.body}"></p>
+                <p th:text="${post.createdAt}"></p>
+            </div>
+        </fieldset>
+    </form>
+</main>
+</body>
+</html>
