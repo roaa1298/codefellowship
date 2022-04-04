@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>My profile</title>
+    <link th:href="@{/form.css}" rel="stylesheet"/>
+    <link th:href="@{/nav.css}" rel="stylesheet"/>
+</head>
+<body>
+
+<header>
+    <nav th:replace="nav :: nav"></nav>
+</header>
+
+<main>
+    <div class="card" style="width: 18rem;">
+        <img src="https://prominentproperties.in/wp-content/uploads/2020/03/537-5372558_flat-man-icon-png-transparent-png.png" class="card-img-top" alt="ProfilePicture" style="width:100%">
+        <div class="card-body">
+            <h5 class="card-text" th:text="${userProfile.firstName} +' '+ ${userProfile.lastName}"></h5>
+            <p class="card-text" th:text="${userProfile.bio}"></p>
+            <p class="card-dateOfBirth" th:text="${userProfile.dateOfBirth}"></p>
+        </div>
+
+    </div>
+    <br>
+    <br>
+
+    <form action="/addPost" method="post">
+        <fieldset>
+            <div class="mb-3">
+                <label class="form-label">Add a post</label><br>
+                <textarea class="form-control" name="body"></textarea>
+                <br>
+                <button type="submit" class="btn btn-primary" name="password">submit</button>
+            </div>
+        </fieldset>
+    </form>
+
+    <br>
+    <br>
+
+    <form th:each="post : ${userProfile.posts}">
+        <legend>Posts</legend>
+        <fieldset>
+            <div class="mb-3">
+                <p th:text="${post.body}"></p>
+                <p th:text="${post.createdAt}"></p>
+            </div>
+        </fieldset>
+    </form>
+</main>
+
+</body>
+</html>

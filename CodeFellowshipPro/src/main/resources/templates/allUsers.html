@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>all users</title>
+    <link th:href="@{/form.css}" rel="stylesheet"/>
+    <link th:href="@{/nav.css}" rel="stylesheet"/>
+</head>
+<body>
+<header>
+    <nav th:replace="nav :: nav"></nav>
+</header>
+<main>
+    <div class="cards">
+        <div class="card" style="width: 18rem;" th:each="eachUser:${usersList}">
+            <div class="card-body">
+                <h5 th:text="${eachUser.firstName + ' ' + eachUser.lastName}"></h5>
+                <h6 th:text="${eachUser.username}"></h6>
+                <p th:text="${eachUser.bio}"></p>
+            </div>
+            <form method="post" th:action="@{'/allUsers'}">
+                <input type="hidden" name="id" th:value="${eachUser.id}">
+                <button th:if="true" type="submit" class="viewProfile">view profile</button>
+
+            </form>
+        </div>
+    </div>
+</main>
+</body>
+</html>
