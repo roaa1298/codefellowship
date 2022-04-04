@@ -8,6 +8,9 @@
 - the main page is accessible to non-logged in users too.
 - in the login page if the user inter wrong username or password, A message will appear telling the user that the username or password is invalid.
 - the password will saved hashed in the database.
+- the login page will move to the profile page.
+- every user has a profile page and they can create a post and it will appear on their profile.
+- if the user inter the allUsers page he/she will find all the users that regesters to this app, and the user can view the other users profiles by clicking on the view profile button. 
 
 ## run the application  
 - clone the repository.
