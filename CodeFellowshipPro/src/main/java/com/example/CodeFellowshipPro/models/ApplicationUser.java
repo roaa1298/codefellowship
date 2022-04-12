@@ -18,6 +18,15 @@ public class ApplicationUser implements UserDetails {
     @OneToMany(mappedBy = "applicationUser")
     List<Post> posts;
 
+    @ManyToMany(cascade={CascadeType.ALL})
+    @JoinTable(name="following_follower",
+            joinColumns={@JoinColumn(name="follower_id")},
+            inverseJoinColumns={@JoinColumn(name="following_id")})
+    private List<ApplicationUser> followers;
+
+    @ManyToMany(mappedBy="followers")
+    private List<ApplicationUser> following;
+
     @Column(unique = true)
     private String username;
 
@@ -49,22 +58,22 @@ public class ApplicationUser implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 
     @Override
@@ -122,5 +131,21 @@ public class ApplicationUser implements UserDetails {
 
     public void setPosts(List<Post> posts) {
         this.posts = posts;
+    }
+
+    public List<ApplicationUser> getFollowers() {
+        return followers;
+    }
+
+    public List<ApplicationUser> getFollowing() {
+        return following;
+    }
+
+    @Override
+    public String toString() {
+        return "ApplicationUser{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }
