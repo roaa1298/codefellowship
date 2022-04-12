@@ -5,30 +5,42 @@
     <title>profile</title>
     <link th:href="@{/form.css}" rel="stylesheet"/>
     <link th:href="@{/nav.css}" rel="stylesheet"/>
+    <script th:src="@{/follow.js}"></script>
 </head>
 <body>
 <header>
     <nav th:replace="nav :: nav"></nav>
 </header>
 <main>
-    <div class="card" style="width: 18rem;">
-        <img src="user.jpg" class="card-img-top" alt="ProfilePicture">
+    <div class="card">
+        <center><img src="https://prominentproperties.in/wp-content/uploads/2020/03/537-5372558_flat-man-icon-png-transparent-png.png" class="card-img-top" alt="ProfilePicture" style="width:25%; height:28%;"></center>
         <div class="card-body">
-            <h5 class="card-text" th:text="${username.firstName} + ${username.lastName}"></h5>
-            <p class="card-text" th:text="${username.bio}"></p>
-            <p class="card-text" th:text="${username.dateOfBirth}"></p>
+            <center><h4 class="card-text" th:text="${username.firstName} +' '+ ${username.lastName}"></h4></center>
+            <center><h5 class="card-text" th:text="${username.username}"></h5></center>
+            <center><p class="card-text" th:text="${username.bio}"></p></center>
+            <center><p class="card-dateOfBirth" th:text="${username.dateOfBirth}"></p></center>
+            <div style="width:100%;">
+                <center> <p class="following"><span th:text="${username.following.size()}"></span> Following</p></center>
+                <center><p class="followers"><span th:text="${username.followers.size()}"></span> Followers</p></center>
+            </div><br>
+            <form method="post" th:action="@{'/user/'+${username.id}}" class="ff">
+                <center><button th:if="true" onclick="change()" id="unfollow" type="submit"  class="follow" name="follow" value="follow">follow</button></center>
+            </form>
         </div>
 
     </div>
     <br>
     <br>
 
+    <h2>Posts</h2>
     <form th:each="post : ${username.posts}">
-        <legend>Posts</legend>
         <fieldset>
             <div class="mb-3">
-                <p th:text="${post.body}"></p>
-                <p th:text="${post.createdAt}"></p>
+                <div style="width:100%; height: 50px;"  class="postBG">
+                    <p th:text="${username.username}" class="userN"></p>
+                    <p th:text="${#temporals.format(post.createdAt, 'dd-MM-yyyy HH:mm')}" class="postDate"></p>
+                </div>
+                <div style="width:100%; border-style: groove;"><p th:text="${post.body}" class="postBody"></p></div>
             </div>
         </fieldset>
     </form>

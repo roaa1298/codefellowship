@@ -72,12 +72,12 @@ input[type=submit]:hover {
 }
 .register {
 border-radius: 5px;
-  background-color: #22577E;
+  background-color: white;
   padding: 20px;
 }
 .inter {
        border-radius: 5px;
-         background-color: #22577E;
+         background-color: white;
          padding: 20px;
        }
 nav{
@@ -102,8 +102,8 @@ flex: 1;
 .card {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
-  width: 36%;
-  height: 42%;
+  width: 100%;
+  height: 40%;
   margin-bottom: 30px;
 }
 .card:hover {
@@ -111,9 +111,15 @@ flex: 1;
 }
 .card-body {
 padding: 2px 16px;
-background: #495371;
+background: #333;
 color: white;
-height: 220px;
+border-style: groove;
+font-family: Georgia, serif;
+height: 390px;
+width: 100%;
+}
+h4 {
+font-size: 5vh;
 }
 h5 {
 font-size: 4vh;
@@ -125,3 +131,44 @@ font-size: 4vh;
 .card-dateOfBirth {
 margin-bottom: 20px;
 }
+.following {
+float:left;
+text-align: center;
+margin-left: 42%;
+}
+.followers {
+float:left;
+text-align: center;
+margin-left: 40px;
+}
+.postDate {
+font-size: 2vh;
+color: gray;
+float:left;
+margin-left: 20px;
+}
+.userN {
+font-weight: bold;
+float: left;
+margin-top:7px;
+}
+.form-label {
+font-weight: bold;
+font-family: Georgia, serif;
+}
+.postBody {
+margin-left: 20px;
+}
+.ff {
+width: 100%;
+height:50px;
+align-items: center;
+display: grid;
+}
+.follow {
+background: #737373;
+}
+.postBG {
+background: #FAEEE0;
+}
+

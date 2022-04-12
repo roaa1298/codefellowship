@@ -19,8 +19,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        return bCryptPasswordEncoder;
+        return new BCryptPasswordEncoder();
     }
 
     @Override
@@ -39,8 +38,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
+                .and().rememberMe().and().formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/myProfile")
+                .permitAll()
+                .loginProcessingUrl("/login-process")
+                .defaultSuccessUrl("/myProfile",true)
                 .and()
                 .logout()
                 .logoutUrl("/logout")

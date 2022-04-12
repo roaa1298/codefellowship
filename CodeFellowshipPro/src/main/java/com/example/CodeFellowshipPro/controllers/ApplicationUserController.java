@@ -39,7 +39,19 @@ public class ApplicationUserController {
         if(p != null){
             ApplicationUser applicationUser=applicationUserRepository.findUserByUsername(p.getName());
             model.addAttribute("user", applicationUser);
-            return "mainPage";
+            ArrayList<Post> usersPosts=new ArrayList<>();
+            if (applicationUser.getFollowing().size() != 0)
+            {
+            for (int i=0 ; i<applicationUser.getFollowing().size() ; i++)
+            {
+                for (int j=0 ; j<applicationUser.getFollowing().get(i).getPosts().size() ; j++)
+                {
+                    usersPosts.add(applicationUser.getFollowing().get(i).getPosts().get(j));
+                }
+            }
+            model.addAttribute("userPost",usersPosts);
+            return "feed";
+            } else {return "mainPage";}
         }
         else{
             return "home";
@@ -73,11 +85,15 @@ public class ApplicationUserController {
 
     @GetMapping("/myProfile")
     public String getMyProfile(Principal p, Model model) {
+        ApplicationUser applicationUser=applicationUserRepository.findUserByUsername(p.getName());
+        model.addAttribute("user", applicationUser);
         model.addAttribute("userProfile", applicationUserRepository.findUserByUsername(p.getName()));
         return "profile";
     }
     @GetMapping("/user/{id}")
-    public String getProfile(@PathVariable long id, Model model) {
+    public String getProfile(@PathVariable long id, Model model,Principal p) {
+        ApplicationUser applicationUser=applicationUserRepository.findUserByUsername(p.getName());
+        model.addAttribute("user", applicationUser);
 
         model.addAttribute("username", applicationUserRepository.getById(id));
         return "otherProfile";
@@ -92,18 +108,38 @@ public class ApplicationUserController {
     }
     @GetMapping("/allUsers")
     public String getAllUsers(Principal p, Model model){
+        ApplicationUser applicationUser=applicationUserRepository.findUserByUsername(p.getName());
+        model.addAttribute("user", applicationUser);
         List<ApplicationUser> allAccounts = new ArrayList<>(applicationUserRepository.findAll());
         allAccounts.remove(applicationUserRepository.findUserByUsername(p.getName()));
         model.addAttribute("usersList", allAccounts);
         return "allUsers";
     }
 
-    @PostMapping("/allUsers")
+    @PostMapping(value = "/allUsers", params = "view")
     public RedirectView viewProfile( Long id){
 
         return new RedirectView("/user/"+id);
     }
 
 
+    @PostMapping("/user/{id}")
+    public RedirectView followUserProfile(@PathVariable long id,Model m,Principal p){
+        ApplicationUser followingUser=applicationUserRepository.findUserById(id);
+        ApplicationUser currentUser=applicationUserRepository.findUserByUsername(p.getName());
+        followingUser.getFollowers().add(currentUser);
+        currentUser.getFollowing().add(followingUser);
+        applicationUserRepository.save(currentUser);
+        return new RedirectView("/user/"+id);
+    }
+//    @PostMapping(value = "/user/{id}", params = "unfollow")
+//    public RedirectView unfollowUserProfile(@PathVariable long id,Model m,Principal p){
+//        ApplicationUser followingUser=applicationUserRepository.findUserById(id);
+//        ApplicationUser currentUser=applicationUserRepository.findUserByUsername(p.getName());
+//        followingUser.getFollowers().remove(currentUser);
+//        currentUser.getFollowing().remove(followingUser);
+//        applicationUserRepository.save(currentUser);
+//        return new RedirectView("/user/"+id);
+//    }
 
 }
